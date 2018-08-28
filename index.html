@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vue Stop Watch</title>
+   <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  
+    <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="assets/style/vueWatch.css">
+		
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+   
+   
+</head>
+  <body>
+<div id="main-App">	
+	
+<!-- Add to List STARTS -->	
+  <div class="container addToList-section">	
+	<div class="row">
+		
+        <div class="col-md-4 offset-4">
+	        <h13>{{newActivity}}</h13>
+	        <input type="tex" v-model="newActivity"> <h14 @click="isVisible = !isVisible">Add Description</h14>
+	        <br> 
+	        <br> 
+	        <textarea class="activity-description" cols="40" v-model="newDescription" v-show="isVisible"></textarea>
+	        <br> 
+	        <button v-on:click="saveActivity" type="button">Include</button>
+	        <br>
+	        <br>
+	        <br>
+	        <div class="actList-container">
+		        <ul class="actList">
+			        <li v-for="project in projectList">
+			        <div class="deleteActivityBtn" v-on:click="deletecard(project)"></div>
+			        <h11>{{project.title}}</h11>
+			        <p>{{project.description}}</p>
+			        </li>
+		        </ul>
+	        </div>
+        </div>
+
+    </div>
+  </div>  <!-- activityList-App ENDS -->
+<!-- Add to List ENDS --> 
+  
+  
+  
+<!-- Timer Section STARTS -->  
+  <div id="timer-App" class="container timer-section">	
+	<div class="row">
+		<div class="col-md-4 offset-4">
+			<br>
+			<br>
+			<div class="projectNameCapture">{{projectName}}</div>
+			<br>
+			<br>
+			<select id="projectListTest" v-model="projectName"></select>
+			<br>
+			<br>
+			<button id="clear">Clear</button>
+			<button id="startBtn">Start</button>
+			<button type="submit" id="stopBtn">Stop</button>
+			<br>
+			<br>
+			<input type="text" id="startTime" placeholder="Start">
+			<br>
+			<br>
+			<input type="text" id="endTime" placeholder="End">
+			<br>
+			<br>
+			<input type="text" id="diff" placeholder="Difference">
+			<br>
+			<br>
+			<textarea id="userNotes"></textarea>
+			<br>
+			<input type="text" id="notesId">
+			<br>
+			<button id="UpdateNotes" onclick="changeNote()">Update Notes</button>						
+		</div>	
+    </div>
+  </div>  <!-- activityList-App ENDS -->
+<!-- Timer Section ENDS -->  
+
+
+<div id="timeKeeperWrapper">
+	<ul id="timeKeeperContainer">
+		
+	</ul>
+</div>  
+  
+</div>  <!-- Main App ENDS -->
+  	  
+  <ul class="mainTabs-List">
+	  <li class="timer-tab"><h15 class="v-centered">Timer</h15></li>
+	  <li class="list-tab"><h15 class="v-centered">List</h15></li>
+  </ul>
+	  
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="assets/js/vueWatch.js"></script>
+</body>
+</html>
