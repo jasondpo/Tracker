@@ -86,19 +86,38 @@ function prependSelect(){
 $(function(){
 	resetList();
 	prependSelect();
-	
-	$(".timer-tab").click(function(){
-		resetList();
-		prependSelect();
-		$(".addToList-section").fadeOut("fast",function(){
-			$(".timer-section").fadeIn();
-		})
-	})
-	$(".list-tab").click(function(){
-		$(".timer-section").fadeOut("fast",function(){
-			$(".addToList-section").fadeIn();
-		})
-	})
+	$(".timer-footer-nav-btn, h18").click(function(){
+		if ($('.addToList-section').css('display') == "none"){
+			    $(".timer-footer-nav-btn").css('-webkit-transform', 'rotateZ(-360deg)');
+			    $(".timer-footer-nav-btn").css('-moz-transform', 'rotateZ(-360deg)');
+			    $(".timer-footer-nav-btn").css('transform', 'rotateZ(-360deg)');
+			    $(".activities").fadeOut("fast", function(){
+					$(".stopwatch").fadeIn("fast");
+				})
+				$(".timer-footer-nav-btn").css({"background-color":"#321E41","background-image":"url(assets/images/clock-icon.png)"});
+				$(".timer-footer-bkg").css("background-color","#FF4874");      
+				$('.timer-section').fadeOut('fast', function(){
+				$(".addToList-section").fadeIn('fast');
+
+			});			
+		}else{
+			resetList();
+			prependSelect();
+				$(".timer-footer-nav-btn").css('-webkit-transform', 'rotateZ(0deg)');
+				$(".timer-footer-nav-btn").css('-moz-transform', 'rotateZ(0deg)');
+				$(".timer-footer-nav-btn").css('transform', 'rotateZ(0deg)');
+			    $(".stopwatch").fadeOut("fast", function(){
+					$(".activities").fadeIn("fast");
+				})				
+				$(".timer-footer-nav-btn").css({"background-color":"#FF4874","background-image":"url(assets/images/running-icon.png)"});
+				$(".timer-footer-bkg").css("background-color","#321E41");      			      	
+				$('.addToList-section').fadeOut('fast', function(){
+				$(".timer-section").fadeIn('fast');
+			});
+		}
+	});
+
+
 
 	// This 1)takes info from local storage, 2)maps the "titles" 3) arranges them in alphabetical order of the "select's" list of <option> tags
 	function resetList(){

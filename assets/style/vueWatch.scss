@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 // Global STARTS
 html,body{
 	font-family: 'Roboto', sans-serif;
@@ -54,10 +56,27 @@ h15{
 	display: block;
 	text-align: center;
 }
-h16{
-	
+h18{
+	position: absolute;
+	width: 200px;
+	height: 20px;
+	left: 50%;
+	margin-left: -100px;
+	bottom: 18px;
+	color: white;
+	text-align: center;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	font-size: 14px;
+	cursor: pointer;
+}
+h18:hover{
+	text-decoration: underline;
 }
 // Typography ENDS
+.stopwatch{
+	display: none;
+}
 .listItem{
 	position: relative;
 	width: 100px;
@@ -106,26 +125,54 @@ h16{
 	resize: none;
 	height: 100px;
 }
-// main tabs
-.mainTabs-List{
+
+
+//////////////// Timer Page STARTS ////////////////
+.greyDots{
 	position: fixed;
-	bottom: 0px;
-	height: 50px;
-	width: 350px;
+	right: 0;
+	top: 0;
+	width: 180px;
+	height:270px;
+	background-image: url(../images/greyDots.png);
+	background-position: 26px -84px;
+	background-repeat: no-repeat;
+}
+
+.timer-footer-bkg{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 76px;
+	background-color: $Purple;
+	transition: all .15s ease-out 0s;	
+}
+.timer-footer-nav-btn{
+	width: 60px;
+	height: 60px;
+	position: absolute;
 	left: 50%;
-	margin: 0px 0px 0px -175px;
-	background-color: #DDD;
-	list-style-type: none;
-	padding: 0px;
-}
-.mainTabs-List li{
-	position: relative;
-	float: left;
-	width: 50%;
-	height: 50px;
+	margin-left: -30px;
+	background-color: $Pink;
+	bottom: 50px;
+	z-index: 2;
+	border-radius: 100%;
 	cursor: pointer;
-	transition: background-color .15s linear;	
+	background-image: url(../images/running-icon.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	transition: all .25s ease-out 0s;
 }
-.mainTabs-List li:hover{
-	background-color: #AAA	
-}
+
+//////////////// Timer Page ENDS ////////////////
+
+
+
+
+
+
+
+
+
+

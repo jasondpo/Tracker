@@ -9,6 +9,8 @@
   
     <!-- Custom styles for this template -->
 	<link rel="stylesheet" href="assets/style/vueWatch.css">
+	<link rel="stylesheet" href="assets/style/intro.css">
+	<link rel="stylesheet" href="assets/vendors/animate.min.css">
 		
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700' rel='stylesheet' type='text/css'>
@@ -17,9 +19,23 @@
    
 </head>
   <body>
+	  
+<!-- INTRO STARTS -->	  
+
+<div class="intro-pinkOverlay">
+	<h17>Created by <span>Jason Dobbins</span></h17>
+	<div class="intro-logo"></div>
+	<div class="intro-logo-text"></div>
+	<div class="intro-whiteDots"></div>
+</div>
+	  
+<!-- INTRO ENDS -->	 
+
+ 
 <div id="main-App">	
 	
 <!-- Add to List STARTS -->	
+	<div class="greyDots"></div>
   <div class="container addToList-section">	
 	<div class="row">
 		
@@ -68,18 +84,18 @@
 			<button type="submit" id="stopBtn">Stop</button>
 			<br>
 			<br>
-			<input type="text" id="startTime" placeholder="Start">
+			<input type="text" style="display: none" id="startTime" placeholder="Start">
 			<br>
 			<br>
-			<input type="text" id="endTime" placeholder="End">
+			<input type="text" style="display: none" id="endTime" placeholder="End">
 			<br>
 			<br>
-			<input type="text" id="diff" placeholder="Difference">
+			<input type="text" style="display: none" id="diff" placeholder="Difference">
 			<br>
 			<br>
-			<textarea id="userNotes"></textarea>
+			<textarea style="display: none" id="userNotes"></textarea>
 			<br>
-			<input type="text" id="notesId">
+			<input style="display: none" type="text" id="notesId">
 			<br>
 			<button id="UpdateNotes" onclick="changeNote()">Update Notes</button>						
 		</div>	
@@ -96,10 +112,13 @@
   
 </div>  <!-- Main App ENDS -->
   	  
-  <ul class="mainTabs-List">
-	  <li class="timer-tab"><h15 class="v-centered">Timer</h15></li>
-	  <li class="list-tab"><h15 class="v-centered">List</h15></li>
-  </ul>
+
+
+  <div class="timer-footer-nav-btn"></div>		  
+  <div class="timer-footer-bkg">
+	  <h18 class="activities">Activities &rarr;</h18>
+	  <h18 class="stopwatch">&larr; Stopwatch</h18>
+  </div>	  
 	  
 
     <!-- Placed at the end of the document so the pages load faster -->
@@ -107,5 +126,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="assets/js/vueWatch.js"></script>
+    <script src="assets/js/intro.js"></script>
 </body>
 </html>
