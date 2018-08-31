@@ -134,24 +134,61 @@ $(function(){
 		}
 		$("#projectListTest").html(text);
 	}
-	
+})		
 //// START & STOP BUTTONS ////	
-	$("#startBtn").click(function(){
+
+
+
+var Active = false;
+
+$(".startStop-btn").click(function(){
+	if(Active == false ){	        
 		if($("#projectListTest").val()!="Select Activity"){
 		$("#startTime").val(getTime());
+		$(".startBtn").text("stop");
+		$(".startStop-btn").addClass("startStop-btn-active");
+		startTimer();
+		Active = true;
 		}else{
 			alert("Choose an activity");
 		}
-	})
-	
-	$("#stopBtn").click(function(e){
-		e.preventDefault();
-		$("#endTime").val(getTime());
-		diff();
-		showTitles();
-	})	
-})	
+	}else{
+		if(Active == true ){
+			$("#endTime").val(getTime());
+			diff();
+			showTitles();
+			$(".startBtn").text("start");
+			$(".startStop-btn").removeClass("startStop-btn-active");
+			stopTimer();
+			Active = false;
+		}
+	};
+		
+});
 
+
+function startTimer(){
+	$('.logoTimerBox').css("background-image", "url(assets/images/stopWatchAnimation.png)");	
+	var timer=1;
+	mainTimer = setInterval(function(){
+		timer++
+		if(timer==1){
+			$('.logoTimerBox').css("background-position", "top left");
+		}if(timer==2){
+			$('.logoTimerBox').css("background-position", "top right");
+		}if(timer==3){
+			$('.logoTimerBox').css("background-position", "bottom right");
+		}if(timer==4){
+			$('.logoTimerBox').css("background-position", "bottom left");
+		}	
+		if(timer==4){timer=0}
+	}, 250);
+}
+
+function stopTimer(){
+	clearInterval(mainTimer);
+	$('.logoTimerBox').css("background-image", "url(assets/images/greyLogo.png)");		
+}
 ///////////	GET TIME ///////
 /* This is the start time and end time. The "diff" function calculates the difference*/
 	function getTime(){
@@ -275,4 +312,33 @@ $(function(){
 		    }
 		}    		
 	}		
+///////////////////////////////////////////////////////////////////////
+	
+	// Array of day names
+	var dayNames = new Array("SUN","MON","TUE","WED","THU","FRI","SAT");
+	
+	// Array of month Names
+	var monthNames = new Array(
+	"JAN","FEB","MAR","APR","MAY","JUNE","JULY","AUG","SEP","OCT","NOV","DEC");
+	
+	var now = new Date();
+	
+	$(".date").html(dayNames[now.getDay()] + ", " + monthNames[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear());
+	
+	
+////////////////////////////// Log Book /////////////////////////////////////////
+
+
+$(".showlog-btn").click(function(){
+	$(".logBook-overlay").fadeIn();
+})
+$(".logBook-overlay-close").click(function(){
+	$(".logBook-overlay").fadeOut();
+})
+
+
+
+
+
+
 

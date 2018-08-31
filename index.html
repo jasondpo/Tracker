@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vue Stop Watch</title>
+<title>Stop Watch</title>
    <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   
@@ -73,42 +73,50 @@
 		<div class="col-md-4 offset-4">
 			<br>
 			<br>
-			<div class="projectNameCapture">{{projectName}}</div>
+			<div class="logoTimerBox"></div>
 			<br>
+			<br>
+			<h21 class="projectNameCapture">{{projectName}}</h21>
+			<br>
+			<h22 class="date"></h22>
 			<br>
 			<select id="projectListTest" v-model="projectName"></select>
 			<br>
 			<br>
+			<div class="startStop-btn"><h20 class="v-centered startBtn">Start</h20></div>
+			<br>
 			<button id="clear">Clear</button>
-			<button id="startBtn">Start</button>
-			<button type="submit" id="stopBtn">Stop</button>
-			<br>
-			<br>
 			<input type="text" style="display: none" id="startTime" placeholder="Start">
-			<br>
-			<br>
 			<input type="text" style="display: none" id="endTime" placeholder="End">
-			<br>
-			<br>
 			<input type="text" style="display: none" id="diff" placeholder="Difference">
 			<br>
 			<br>
-			<textarea style="display: none" id="userNotes"></textarea>
-			<br>
-			<input style="display: none" type="text" id="notesId">
-			<br>
-			<button id="UpdateNotes" onclick="changeNote()">Update Notes</button>						
+			<h23 class="showlog-btn">Log Book</h23>
 		</div>	
     </div>
   </div>  <!-- activityList-App ENDS -->
+  
+	<!--Log Book STARTS -->
+	<div class="logBook-overlay">
+		<h24 class="logBook-overlay-close">&larr; Back</h24>
+		
+		<div class="logbook-containter">	
+			<textarea id="userNotes"></textarea>
+			<br>
+			<input type="text" id="notesId">
+			<br>
+			<ul id="timeKeeperContainer"></ul>
+		  	<br>
+			<button id="UpdateNotes" onclick="changeNote()">Update Notes</button>
+			
+		</div>		
+	</div>
+	<!--Log Book ENDS -->
+			  
 <!-- Timer Section ENDS -->  
 
 
-<div id="timeKeeperWrapper">
-	<ul id="timeKeeperContainer">
-		
-	</ul>
-</div>  
+
   
 </div>  <!-- Main App ENDS -->
   	  
