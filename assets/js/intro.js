@@ -13,14 +13,15 @@ var animationEnd = (function(el) {
   }
 })(document.createElement('div'));
 
+
 $(function(){
-	setTimeout(function(){ 	
-		$("h17").fadeIn("slow").delay(1000).fadeOut("slow", function(){
-			$(".intro-logo").fadeIn().addClass("animated bounceInDown").one(animationEnd, function(){
-				$(".intro-logo-text").fadeIn().addClass("animated bounceInLeft").one(animationEnd, function(){
-				$(".intro-pinkOverlay").delay(1000).fadeOut("slow")
-					});		
-			});		
-		})
-	}, 500)
+	setTimeout(function(){
+		$("h17").fadeIn("slow").delay(1000).fadeOut("slow").delay(500).queue(function(){
+			$(".intro-logo").delay(500).addClass("intro-logo-animate").delay(500).queue(function(){
+				$(".intro-logo-text").fadeIn("fast").delay(1500).queue(function(){
+					$(".intro-pinkOverlay").fadeOut("slow");
+				});
+			});
+		});	
+	}, 500);
 })

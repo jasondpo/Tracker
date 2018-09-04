@@ -1,0 +1,19 @@
+@media all and (max-height: 570px) {
+  /* Applies styles UP TO max height */
+  .logoTimerBox {
+    top: 15px; }
+  h23 {
+    margin-left: -60px;
+    margin-top: 54px;
+    width: 120px;
+    height: 45px;
+    font-size: 14px;
+    padding-top: 14px; }
+  h21 {
+    margin-top: 40px; }
+  h18 {
+    display: none !important; }
+  .timer-footer-bkg {
+    height: 36px; }
+  .timer-footer-nav-btn {
+    bottom: 10px; } }

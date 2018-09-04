@@ -23,29 +23,36 @@ h17 span{
 	right:0;
 	bottom:0;
 	background-color: #FF4874;
-	display: block; // Set to none for testing
+	display: none; // Set to none for testing
 }
+
 .intro-logo{
 	position: absolute;
-	top:100px;
+	top:-230px;
 	left: 50%;
 	margin-left: -90px;
 	width: 180px;
 	height: 226px;
 	background-image: url(../images/intro-stopWatch-logo.png);
-	display: none;	
+	-webkit-transition-timing-function: ease-in;
+	transition-timing-function: ease-in;
+    -webkit-transition: top .5s; /* Safari */
+    transition: top .5s;		
 }
 .intro-logo-text{
 	position: absolute;
 	top:350px;
 	left: 50%;
-	margin-left: -92px;
-	width: 184px;
+	margin-left: -96px;
+	width: 192px;
 	height: 22px;
 	background-image: url(../images/recordBreaker-text.png);
 	background-position: center top;
 	background-repeat: no-repeat;
 	display: none;
+}
+.intro-logo-animate{
+	top:100px;	
 }
 .intro-whiteDots{
 	position: fixed;
@@ -54,4 +61,7 @@ h17 span{
 	width: 180px;
 	height:180px;
 	background-image: url(../images/whiteDots.png);
+}
+.showMe{
+	display: block;
 }

@@ -1,5 +1,7 @@
 const STORAGE_KEY="projectStorage"
 
+
+
 const project = [
     {
       title: 'Jogging', 
@@ -142,19 +144,22 @@ $(function(){
 var Active = false;
 
 $(".startStop-btn").click(function(){
+	var testThis=$("#projectListTest").val();
 	if(Active == false ){	        
 		if($("#projectListTest").val()!="Select Activity"){
-		$("#startTime").val(getTime());
-		$(".startBtn").text("stop");
-		$(".startStop-btn").addClass("startStop-btn-active");
-		startTimer();
-		Active = true;
+			$("#startTime").val(getTime());
+			$("#App-startClock").val(getDayTime());
+			$(".startBtn").text("stop");
+			$(".startStop-btn").addClass("startStop-btn-active");
+			startTimer();
+			Active = true;
 		}else{
 			alert("Choose an activity");
 		}
 	}else{
 		if(Active == true ){
 			$("#endTime").val(getTime());
+			$("#App-endClock").val(getDayTime());			
 			diff();
 			showTitles();
 			$(".startBtn").text("start");
@@ -241,18 +246,23 @@ function stopTimer(){
 ////////////////////////////////////
 
 	function showTitles(){
-		var	value1 = $(".projectNameCapture").text(),
-			value2 = $("#diff").val(),
-			value4 = Math.floor((Math.random() * 100000) + 1);
+		var	projectName = $(".projectNameCapture").text(),
+			timeDiff = $("#diff").val(),
+			startClock=$("#App-startClock").val(),
+			endClock=$("#App-endClock").val(),			
+			randomNu = Math.floor((Math.random() * 100000) + 1);
 			storedMessagesJSON = localStorage.displayMessages || '[]',
             storedMessages = JSON.parse(storedMessagesJSON),
-            displayMessage = $('#timeKeeperContainer').val();
+            displayMessage = $('#timeKeeperContainer').val();			
 				    		    
 		    storedMessages.unshift({
-				title: value1,
-				time: value2,
-				notes:"This is jason",
-				id:value4,
+				title: projectName,
+				time: timeDiff,
+				notes:"Write a note...",
+				date:todaysDate,
+				begin:startClock,
+				end:endClock,
+				id:randomNu,
 			})
 			$("#diff, #startTime, #startTime, #endTime").val("");
 		    localStorage.displayMessages = JSON.stringify(storedMessages);
@@ -265,7 +275,7 @@ function stopTimer(){
 		var tex = "";
 		var z = 0;
 			while (z < storedMessages.length) {
-			    tex += "<li  onclick='showNotes(this)' class='listItem' id='"+storedMessages[z].id+"'><div class='deleteMe' onclick='deleteItem(this)'></div>"+storedMessages[z].title+"</li>";
+			    tex += "<li id='l"+storedMessages[z].id+"' class='listItem'><h25>"+storedMessages[z].title+"</h25><br><h26>"+storedMessages[z].time+"</h26><h27>"+storedMessages[z].date+"<br><span>"+storedMessages[z].begin+" - "+storedMessages[z].end+"</span></h27><h28 onclick='showNotes(this)'>Note</h28><h29 onclick='deleteItem(this)' id='"+storedMessages[z].id+"'>Delete</h29></li>";
 			    z++;
 		}
 			$("#timeKeeperContainer").html(tex);
@@ -279,7 +289,7 @@ function stopTimer(){
 	})
 	
 	function deleteItem(obj){
-		getID=$(obj).closest("li").attr("id");		
+		getID=$(obj).attr("id");		
 		for (var i = 0; i < storedMessages.length; i++) {
 		    if (storedMessages[i].id == getID) {
 		        storedMessages.splice(i, 1);
@@ -288,7 +298,8 @@ function stopTimer(){
 		        break;
 		    }
 		}    		
-	}	    
+	}	
+////////////////////////	   
 
 	function changeNote(){
 		newNotes=$("#userNotes").val();
@@ -302,40 +313,112 @@ function stopTimer(){
 		}    		
 	}	
 
+////////////////////////
 
-	function showNotes(obj){
-		getID=$(obj).attr("id");		
+	function showNotes(obj){		
+		$(".logbook-container").fadeOut("fast");
+		$("h30").html("<span>Log Book</span> \/ Notes");
+		$("#noteBook-container").fadeIn("fast");			
+		getID=$(obj).closest("li").find("h29").attr("id");
+		
 		for (var i = 0; i < storedMessages.length; i++) {
 		    if (storedMessages[i].id == getID) {
 				$("#userNotes").val(storedMessages[i].notes);
 				$("#notesId").val(getID)
+				
+				$("h32").html("<span>"+storedMessages[i].title+"</span><br>"+storedMessages[i].time+" | <strong>"+storedMessages[i].begin+" - "+storedMessages[i].end+"</strong> | "+storedMessages[i].date)
+				
 		    }
 		}    		
-	}		
-///////////////////////////////////////////////////////////////////////
+	}
+	
+
+			
+//////////////////////////// Today's Date ///////////////////////////////////////////
 	
 	// Array of day names
-	var dayNames = new Array("SUN","MON","TUE","WED","THU","FRI","SAT");
+	var dayNames = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
 	
 	// Array of month Names
 	var monthNames = new Array(
-	"JAN","FEB","MAR","APR","MAY","JUNE","JULY","AUG","SEP","OCT","NOV","DEC");
+	"Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec");
 	
 	var now = new Date();
 	
 	$(".date").html(dayNames[now.getDay()] + ", " + monthNames[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear());
 	
+	todaysDate=(dayNames[now.getDay()] + ", " + monthNames[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear());
+
+
+//////////////////// Current Time //////////////////////////// 
+	
+
+function getDayTime() {
+    var d = new Date();
+    var h = d.getHours();
+    var m = addZero(d.getMinutes());
+    var timeDay = h > 12 ? h-12 + ":" + m+' pm' : h + ":" + m+' am' ;
+    
+    return timeDay;
+}	
 	
 ////////////////////////////// Log Book /////////////////////////////////////////
 
 
 $(".showlog-btn").click(function(){
-	$(".logBook-overlay").fadeIn();
-})
-$(".logBook-overlay-close").click(function(){
-	$(".logBook-overlay").fadeOut();
+	$(".logBook-overlay").fadeIn("fast");
+	indicateNote();
 })
 
+$(".logBook-overlay-close").click(function(){
+	if($('#noteBook-container').is(':visible')){
+		$("#noteBook-container").fadeOut("fast");
+		$("h30").text("Log Book");
+		$(".logbook-container").fadeIn("fast");
+		indicateNote();						
+	}else{
+		$(".logBook-overlay").fadeOut("fast");		
+	}
+})
+
+
+	$("h30").click(function(){ // h30 is the section title
+		$("#noteBook-container").fadeOut("fast");
+		$("h30").text("Log Book");
+		$(".logbook-container").fadeIn("fast");
+		indicateNote();	
+	})
+
+//////////////////////// Check for Notes START ////////////////////////	
+
+	function indicateNote(){
+		for (var i = 0; i < storedMessages.length; i++) {
+		    if(storedMessages[i].notes == "Write a note..." || storedMessages[i].notes == ""){
+				$("#l"+storedMessages[i].id).find("h28").css({"color":"","background-position":""}) 
+		    }else{
+			  	$("#l"+storedMessages[i].id).find("h28").css({"color":"#FF4874","background-position":"left top"})  
+		    }
+		}    		
+	}
+
+//////////////////////// Check for Notes END ////////////////////////	
+
+
+
+// Delete project from Add to project list
+
+$("#deleteListItem").click(function(){
+	listItem=$("input[name='project']:checked").val();
+	for (var i = 0; i < firstApp.projectList.length; i++) {
+	    if (firstApp.projectList[i].title == listItem) {
+	        firstApp.projectList.splice(i, 1);
+	        localStorage.projectStorage = JSON.stringify(firstApp.projectList);
+	        showMessages()
+	        break;
+	    }
+	}    		
+
+})
 
 
 
